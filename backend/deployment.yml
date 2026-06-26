@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-deploy
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      name: backend-pod
+      labels: 
+        app: backend
+    spec:
+      containers: 
+        - name: be-con
+          image: komal0116/3-tier-docker:backend
+          ports: 
+            - containerPort: 8080
+          

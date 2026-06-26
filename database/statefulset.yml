@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: my-sts
+spec:
+  serviceName: "my-svc"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-DB
+  template:
+    metadata:
+      name: my-dbpod
+      labels:
+        app: my-DB
+    spec:
+      containers:
+       - name: my-studentdb
+         image: mariadb:latest
+         ports:
+          - containerPort: 3306
+         env: 
+          - name: MYSQL_ROOT_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: my-secret
+                key: password
+          - name: MYSQL_DATABASE
+            valueFrom:
+              secretKeyRef:
+                name: my-secret
+                key: database
+         volumeMounts:
+          - mountPath: "/var/lib/mysql"
+            name: ebs-volume
+      volumes:
+       - name: ebs-volume
+         persistentVolumeClaim:
+           claimName: my-ebs-pvc
