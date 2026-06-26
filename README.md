@@ -1,6 +1,6 @@
 # Three-Tier Application Deployment on Kubernetes
 
-This project demonstrates the deployment of a three-tier web application on Kubernetes using Docker containers. The application consists of a frontend, backend API, and database layer.
+This project demonstrates the deployment of a three-tier web application on Kubernetes. The application consists of a frontend, backend API, and database layer.
 ---
 
 ## Documentation
